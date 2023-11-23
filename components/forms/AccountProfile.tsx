@@ -25,7 +25,6 @@ import { isBase64Image } from "@/lib/utils";
 import { UserValidation } from "@/lib/validations/user";
 import { updateUser } from "@/lib/actions/user.actions";
 
-
 interface Props {
   user: {
     id: string;
@@ -62,13 +61,13 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     if (hasImageChanged) {
       const imgRes = await startUpload(files);
 
-      if (imgRes && imgRes[0].url) {
-        values.profile_photo = imgRes[0].url;
+      if (imgRes && imgRes[0].fileUrl) {
+        values.profile_photo = imgRes[0].fileUrl;
       }
     }
 
     await updateUser({
-      name: user.id,
+      name: values.name,
       path: pathname,
       username: values.username,
       userId: user.id,
